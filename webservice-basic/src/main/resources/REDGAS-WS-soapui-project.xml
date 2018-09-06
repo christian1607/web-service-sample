@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="b5fd35cd-602f-4d9f-9500-6b748ac1150e" activeEnvironment="Default" name="REDGAS-WS" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="d59a9417-517a-4bcc-9d09-60ad8d509eba" wsaVersion="NONE" name="RedgasServiceSoapBinding" type="wsdl" bindingName="{http://endpoint.ws.redgas.com/}RedgasServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://192.168.1.18:8180/webservice-basic/RedgasService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://192.168.1.18:8180/webservice-basic/RedgasService?wsdl"><con:part><con:url>http://192.168.1.18:8180/webservice-basic/RedgasService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="RedgasService" targetNamespace="http://endpoint.ws.redgas.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://endpoint.ws.redgas.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://endpoint.ws.redgas.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="addProduct" type="tns:addProduct"/>
+      <xs:element name="addProductResponse" type="tns:addProductResponse"/>
+      <xs:element name="listAllProducts" type="tns:listAllProducts"/>
+      <xs:element name="listAllProductsResponse" type="tns:listAllProductsResponse"/>
+      <xs:element name="removeProducts" type="tns:removeProducts"/>
+      <xs:element name="removeProductsResponse" type="tns:removeProductsResponse"/>
+      <xs:complexType name="listAllProducts">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="listAllProductsResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:product"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="codigo" type="xs:long"/>
+          <xs:element minOccurs="0" name="fechaVencimiento" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="nombre" type="xs:string"/>
+          <xs:element name="precio" type="xs:double"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removeProducts">
+        <xs:sequence>
+          <xs:element name="arg0" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="removeProductsResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="addProduct">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="tns:product"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="addProductResponse">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:element name="RedGasException" type="tns:RedGasException"/>
+      <xs:complexType name="RedGasException">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="mensaje" type="xs:string"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="removeProducts">
+    <wsdl:part element="tns:removeProducts" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProductResponse">
+    <wsdl:part element="tns:addProductResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listAllProductsResponse">
+    <wsdl:part element="tns:listAllProductsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listAllProducts">
+    <wsdl:part element="tns:listAllProducts" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RedGasException">
+    <wsdl:part element="tns:RedGasException" name="RedGasException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="removeProductsResponse">
+    <wsdl:part element="tns:removeProductsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProduct">
+    <wsdl:part element="tns:addProduct" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RedgasService">
+    <wsdl:operation name="listAllProducts">
+      <wsdl:input message="tns:listAllProducts" name="listAllProducts"></wsdl:input>
+      <wsdl:output message="tns:listAllProductsResponse" name="listAllProductsResponse"></wsdl:output>
+      <wsdl:fault message="tns:RedGasException" name="RedGasException"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeProducts">
+      <wsdl:input message="tns:removeProducts" name="removeProducts"></wsdl:input>
+      <wsdl:output message="tns:removeProductsResponse" name="removeProductsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addProduct">
+      <wsdl:input message="tns:addProduct" name="addProduct"></wsdl:input>
+      <wsdl:output message="tns:addProductResponse" name="addProductResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RedgasServiceSoapBinding" type="tns:RedgasService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listAllProducts">
+      <soap:operation soapAction="listAllProducts" style="document"/>
+      <wsdl:input name="listAllProducts">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listAllProductsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RedGasException">
+        <soap:fault name="RedGasException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeProducts">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="removeProducts">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeProductsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addProduct">
+      <soap:operation soapAction="addProduct" style="document"/>
+      <wsdl:input name="addProduct">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addProductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RedgasService">
+    <wsdl:port binding="tns:RedgasServiceSoapBinding" name="RedgasServicePort">
+      <soap:address location="http://192.168.1.18:8180/webservice-basic/RedgasService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://192.168.1.18:8180/webservice-basic/RedgasService</con:endpoint></con:endpoints><con:operation id="cc647407-b8d9-43d7-b079-9d583b56fbb5" isOneWay="false" action="addProduct" name="addProduct" bindingOperationName="addProduct" type="Request-Response" outputName="addProductResponse" inputName="addProduct" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e890740b-44ee-420c-8800-b7a114426ae7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.18:8180/webservice-basic/RedgasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:end="http://endpoint.ws.redgas.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <end:addProduct>
+         <!--Optional:-->
+         <arg0>
+            <codigo>?</codigo>
+            <!--Optional:-->
+            <fechaVencimiento>?</fechaVencimiento>
+            <!--Optional:-->
+            <nombre>?</nombre>
+            <precio>?</precio>
+         </arg0>
+      </end:addProduct>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="addProduct"/></con:call></con:operation><con:operation id="86fef94b-4263-4d40-a759-467f6a55f6a3" isOneWay="false" action="listAllProducts" name="listAllProducts" bindingOperationName="listAllProducts" type="Request-Response" outputName="listAllProductsResponse" inputName="listAllProducts" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e2fab27a-3a36-4197-befb-85acf1e7a8ad" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.18:8180/webservice-basic/RedgasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:end="http://endpoint.ws.redgas.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <end:listAllProducts/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="listAllProducts"/></con:call></con:operation><con:operation id="b0704346-45b4-43fe-bcd5-329b891c9862" isOneWay="false" action="" name="removeProducts" bindingOperationName="removeProducts" type="Request-Response" outputName="removeProductsResponse" inputName="removeProducts" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="edcc7502-9600-4374-8119-e66f14289b0a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://192.168.1.18:8180/webservice-basic/RedgasService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:end="http://endpoint.ws.redgas.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <end:removeProducts>
+         <arg0>?</arg0>
+      </end:removeProducts>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://endpoint.ws.redgas.com/RedgasService/removeProducts"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
